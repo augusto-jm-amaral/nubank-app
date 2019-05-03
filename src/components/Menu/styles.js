@@ -30,6 +30,7 @@ export const NavText = styled.Text`
   font-size: 15px;
   color: #FFF;
   margin-left: 15px;
+  flex: 1;
 `;
 
 export const SignOutButton = styled.TouchableOpacity`

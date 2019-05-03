@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Animated } from 'react-native';
@@ -36,6 +36,12 @@ export default function Main() {
     ],
     { useNativeDriver: true },
   );
+  const [showAmount, setShowAmount] = useState(true);
+  const toggleIconName = !showAmount ? 'visibility' : 'visibility-off';
+  const descriptionStyle = {
+    color: showAmount ? '#333' : 'transparent',
+    backgroundColor: showAmount ? 'transparent' : '#EEE',
+  }
 
   function onHandlerStateChange(event) {
     if (event.nativeEvent.oldState === State.ACTIVE) {
@@ -66,7 +72,7 @@ export default function Main() {
 
   return (
     <Container>
-      <Header />
+      <Header translateY={translateY} />
       <Content>
         <Menu translateY={translateY} />
         <PanGestureHandler
@@ -85,11 +91,22 @@ export default function Main() {
           >
             <CardHeader>
               <Icon name="attach-money" size={28} color="#666" />
-              <Icon name="visibility-off" size={28} color="#666" />
+              <Icon.Button
+                name={toggleIconName}
+                backgroundColor="transparent"
+                underlayColor="transparent"
+                size={28}
+                color="#666"
+                onPress={() => setShowAmount(!showAmount)}
+              />
             </CardHeader>
             <CardContent>
               <Title>Saldo disponível</Title>
-              <Description>R$ 99.232,69</Description>
+              <Description
+                style={descriptionStyle}
+              >
+                R$ 99.232,69
+              </Description>
             </CardContent>
             <CardFooter>
               <Annotation>
